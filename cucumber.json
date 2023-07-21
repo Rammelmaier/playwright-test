@@ -1,0 +1,19 @@
+{
+  "default": {
+    "formatOptions": {
+      "snippetInterface": "async-await"
+    },
+    "paths": [
+      "features/**/*.feature"
+    ],
+    "require": [
+      "src/stepDefinitions/**/*.steps.ts",
+      "src/hooks/cucumberHooks.ts"
+    ],
+    "publishQuiet": true,
+    "dryRun": false,
+    "requireModule": [
+      "ts-node/register"
+    ]
+  }
+}
