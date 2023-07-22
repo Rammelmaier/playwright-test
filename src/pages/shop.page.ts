@@ -1,39 +1,23 @@
-import { expect, type Locator, type Page } from '@playwright/test';
+import { type Page } from '@playwright/test';
 import { HeaderComponent } from './components/header.component';
 import { pageFixture } from '../utils/pageFixture';
 import { BasketOverlayComponent } from './components/basketOverlay.component';
-
-// const header = new HeaderComponent(pageFixture.page);
-// const cartOverlay = new BasketOverlayComponent(pageFixture.page);
 
 export class ShopPage {
 
   readonly page: Page;
 
-  // .//div[contains(@class, 'note-item') and contains(@class, "hasDiscount") and //span[contains(@class, "product_count")]]
-
-  // product cart by product name
-  // .//div[contains(@class, 'note-item') and .//div[contains(@class, 'product_name')]/text()='Творческий беспорядок']
-
   Elements = {
-    // fullPriceProductImage: (productNumber: string) => `(.//div[contains(@class, 'note-item') and not (contains(@class, "hasDiscount"))]//img)[${productNumber}]`,
-    // fullPriceProductName: (productNumber: string) => `(.//div[contains(@class, 'note-item') and not (contains(@class, "hasDiscount"))]//div[contains(@class, 'product_name')])[${productNumber}]`,
-    // fullPriceProductPrice: (productNumber: string) => `(.//div[contains(@class, 'note-item') and not (contains(@class, "hasDiscount"))]//span[contains(@class, 'product_price')])[${productNumber}]`,
-    // fullPriceProductQtyInput: (productNumber: string) => `(.//div[contains(@class, 'note-item') and not (contains(@class, "hasDiscount"))]//input[@name="product-enter-count"])[${productNumber}]`,
-    // fullPriceProductAddBtn: (productNumber: string) => `(.//div[contains(@class, 'note-item') and not (contains(@class, "hasDiscount"))]//button[contains(@class, 'actionBuyProduct')])[${productNumber}]`,
-
-
-    // discountProduct: (productNumber: string) => `(.//div[contains(@class, "note-item") and contains(@class, "hasDiscount")]//img)[${productNumber}]`,
-    // discountProductName: (productNumber: string) => `(.//div[contains(@class, 'note-item') and contains(@class, "hasDiscount")]//div[contains(@class, 'product_name')])[${productNumber}]`,
-    // discountProductPrice: (productNumber: string) => `(.//div[contains(@class, 'note-item') and contains(@class, "hasDiscount")]//span[contains(@class, 'product_price')])[${productNumber}]`,
-    // discountProductQtyInput: (productNumber: string) => `(.//div[contains(@class, 'note-item') and contains(@class, "hasDiscount")]//input[@name="product-enter-count"])[${productNumber}]`,
-    // discountProductAddBtn: (productNumber: string) => `(.//div[contains(@class, 'note-item') and contains(@class, "hasDiscount")]//button[contains(@class, 'actionBuyProduct')])[${productNumber}]`,
-
+    // eslint-disable-next-line
     productCardByProductName: (name: string) => `//div[contains(@class, 'note-item') and .//div[contains(@class, 'product_name')]/text()='${name}']`,
+    // eslint-disable-next-line
     productPriceByProductName: (name: string) => `//div[contains(@class, 'note-item') and .//div[contains(@class, 'product_name')]/text()='${name}']//span[contains(@class, 'product_price')]`,
+    // eslint-disable-next-line
     productQtyInputByProductName: (name: string) => `//div[contains(@class, 'note-item') and .//div[contains(@class, 'product_name')]/text()='${name}']//input[@name="product-enter-count"]`,
+    // eslint-disable-next-line
     productAddBtnByProductName: (name: string) => `//div[contains(@class, 'note-item') and .//div[contains(@class, 'product_name')]/text()='${name}']//button[contains(@class, 'actionBuyProduct')]`,
 
+    goToNexPageButton: (pageNumber: string) => `li.page-item [data-page-number='${pageNumber}']`
   }
 
   headerComponent = new HeaderComponent(pageFixture.page);
@@ -49,6 +33,10 @@ export class ShopPage {
 
   async clickProductAddButton(productName: string) {
     await this.page.locator(this.Elements.productAddBtnByProductName(productName)).click();
+  }
+
+  async clickGoToNexPageButton(pageNumber: string) {
+    await this.page.locator(this.Elements.goToNexPageButton(pageNumber)).click();
   }
 
 }

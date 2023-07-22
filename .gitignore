@@ -5,3 +5,5 @@ package-lock.json
 /playwright/.cache/
 tests/example.spec.ts
 tests-examples
+test-result
+cucumber-report.html
