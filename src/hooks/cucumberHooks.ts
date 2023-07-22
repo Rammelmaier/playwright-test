@@ -21,6 +21,10 @@ AfterStep(async function ({ pickleStep, result }) {
 });
 
 After(async function ({ pickle, result }) {
+  if (result?.status === 'FAILED') {
+    const img = await pageFixture.page.screenshot({ path: `./test-result/screenshot/${pickle.name}.png` });
+    await this.attach(img, 'image/png');
+  }
   await pageFixture.page.close();
   await context.close();
   console.log(`${result?.status === 'PASSED' ? '\u2705' : '\u274C'}` + '  Scenario: ' + pickle.name + ' ');
